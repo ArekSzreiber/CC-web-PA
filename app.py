@@ -12,7 +12,9 @@ def index():
 
 @app.route('/design')
 def design():
-    return render_template('design.html')
+    shows = queries.get_shows()
+    return render_template('design.html', shows=shows)
+
 
 #/shows/<show>/seasons/<int:season>
 @app.route('/season', methods=["POST"])
