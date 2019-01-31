@@ -4,6 +4,12 @@ from data import queries
 app = Flask('codecool_series')
 
 
+def correct_int(number, default):
+    if not type(number) is int:
+        return default
+    return number
+
+
 @app.route('/')
 def index():
     shows = queries.get_shows()
@@ -21,6 +27,7 @@ def design():
 def route_season():
     show = request.form.get('show', '')
     season_nr = request.form.get('season', 1)
+    season_nr = correct_int(season_nr, 1)
     seasons = queries.get_season(show, season_nr)
     header = ['Title',
               'Rating',
