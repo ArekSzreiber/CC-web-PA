@@ -63,6 +63,29 @@
                         {% endfor %}
                     </ul>
                 </div>
+            {% if seasons is defined %}
+            {{ seasons }}
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            {% for header in headers %}
+                            <th>{{ header }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for season in seasons %}
+                        <tr>
+                            <td>{{ season['title'] }}</td>
+                            <td>{{ season['rating'] }}</td>
+                            <td>{{ season['year'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
             </section>
             <footer>
                 Copyright, bla-bla
