@@ -147,7 +147,7 @@
             </div>
             <div class="card">
                 <p>A form example to edit a TV show's episode:</p>
-                <form action="#" method="post">
+                <form action="{{ url_for('route_season') }}" method="post">
                     <p class="form-element">
                         <label class="form-element-label" for="form-example-show">Show:</label>
                         <select name="show" id="form-example-show">
