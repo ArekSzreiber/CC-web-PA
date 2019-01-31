@@ -20,7 +20,7 @@ def route_season():
     show = request.form.get('show', '')
     season_nr = request.form.get('season', 1)
     seasons = queries.get_season(show, season_nr)
-    return render_template('index.html', seasons)
+    return render_template('index.html', seasons=seasons)
 
 
 def main():
