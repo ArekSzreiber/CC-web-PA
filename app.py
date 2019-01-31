@@ -14,6 +14,11 @@ def index():
 def design():
     return render_template('design.html')
 
+#/shows/<show>/seasons/<int:season>
+@app.route('/season', methods=["POST"])
+def route_season():
+    return render_template('index.html')
+
 
 def main():
     app.run(debug=True)
