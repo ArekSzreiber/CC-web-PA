@@ -5,9 +5,13 @@ app = Flask('codecool_series')
 
 
 @app.route('/')
-def index():
-    shows = queries.get_most_rated()
-    return render_template('index.html', shows=shows)
+@app.route('/page/<int:page>')
+def index(page=1):
+    try:
+        shows = queries.get_most_rated(page)
+        return render_template('index.html', shows=shows)
+    except Exception as e:
+        return "Error 500"
 
 
 @app.route('/design')
