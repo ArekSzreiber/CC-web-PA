@@ -10,7 +10,9 @@ def get_shows():
     """)
 
 
-def get_most_rated():
+def get_most_rated(page=1):
+    page -= 1  # n-th page has index (n-1)
+    number_at_page = 15
     return data.execute_select("""
         SELECT
             DISTINCT shows.title,
@@ -31,5 +33,7 @@ def get_most_rated():
             trailer,
             homepage
         ORDER BY rating DESC
-        LIMIT 15;
-    """)
+        OFFSET %(ignored)s
+        LIMIT %(amount)s;
+    """, {'ignored': page*number_at_page,
+          'amount': number_at_page})
