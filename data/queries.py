@@ -16,7 +16,7 @@ def get_most_rated():
             DISTINCT shows.title,
             shows.year,
             shows.runtime,
-            MAX(genres.name) AS genres,
+            ARRAY_TO_STRING((ARRAY_AGG(DISTINCT genres.name))[1:3], ', ') AS genres,
             shows.rating,
             shows.trailer,
             shows.homepage
