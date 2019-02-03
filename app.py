@@ -20,7 +20,7 @@ def index(page=1):
         session['previous_column'] = column
         session['order'] = reverse
         shows = queries.get_sorted_shows(page, column, reverse)
-        return render_template('index.html', shows=shows)
+        return render_template('index.html', shows=shows, page=page)
     except Exception as e:
         return "Error 500"
 
