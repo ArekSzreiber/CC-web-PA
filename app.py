@@ -8,7 +8,11 @@ app = Flask('codecool_series')
 @app.route('/page/<int:page>')
 def index(page=1):
     try:
-        shows = queries.get_most_rated(page)
+        column = request.args.get('column', 'rating')
+        reverse = request.args.get('reversed', False)
+        if reverse == "False":
+            reverse = False
+        shows = queries.get_sorted_shows(page, column, reverse)
         return render_template('index.html', shows=shows)
     except Exception as e:
         return "Error 500"
