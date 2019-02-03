@@ -59,12 +59,13 @@
                         <thead>
                             <tr>
                                 <th><a href="{{ url_for('index', column='title') }}">Title</a></th>
-                                <th>Year</th>
-                                <th>Runtime</th>
-                                <th>Genre</th>
-                                <th>Rating</th>
+                                <th><a href="{{ url_for('index', column='year') }}">Year</a></th>
+                                <th><a href="{{ url_for('index', column='runtime') }}">Runtime</a></th>
+                                <th><a href="{{ url_for('index', column='genres') }}">Genres</a></th>
+                                <th><a href="{{ url_for('index', column='rating') }}">Rating</a></th>
                                 <th>Trailer</th>
                                 <th>Homepage</th>
+
                             </tr>
                         </thead>
                         <tbody>
