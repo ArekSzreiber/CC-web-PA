@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, session
 from data import queries
 
 app = Flask('codecool_series')
+
+app.secret_key = b'\x12\x06\x97O\x8aaw\xadW\x18\xa7\x08%n\x7f\x1a_\xb6\xe03\xf3\xe4\x9f'
 
 
 @app.route('/')
@@ -9,9 +11,14 @@ app = Flask('codecool_series')
 def index(page=1):
     try:
         column = request.args.get('column', 'rating')
-        reverse = request.args.get('reversed', False)
-        if reverse == "False":
+        previous_column = session.get('previous_column', 'rating')
+        reverse = session.get('order', False)
+        if column == previous_column:
+            reverse = not reverse
+        else:
             reverse = False
+        session['previous_column'] = column
+        session['order'] = reverse
         shows = queries.get_sorted_shows(page, column, reverse)
         return render_template('index.html', shows=shows)
     except Exception as e:
