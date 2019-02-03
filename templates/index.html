@@ -55,6 +55,35 @@
                     </p>
                 </div>
                 <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><a href="{{ url_for('index', column='title') }}">Title</a></th>
+                                <th><a href="{{ url_for('index', column='year') }}">Year</a></th>
+                                <th><a href="{{ url_for('index', column='runtime') }}">Runtime</a></th>
+                                <th><a href="{{ url_for('index', column='genres') }}">Genres</a></th>
+                                <th><a href="{{ url_for('index', column='rating') }}">Rating</a></th>
+                                <th>Trailer</th>
+                                <th>Homepage</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for show in shows %}
+                            <tr>
+                                <td>{{ show['title'] }}</td>
+                                <td>{{ show['year'] }}</td>
+                                <td>{{ show['runtime'] }}</td>
+                                <td>{{ show['genres'] }}</td>
+                                <td>{{ show['rating'] }}</td>
+                                <td><a href="{{ show['trailer'] }}">Trailer</a></td>
+                                <td><a href="{{ show['homepage'] }}">Homepage</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
                     <ul>
                         {% for show in shows %}
                         <li>
