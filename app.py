@@ -6,6 +6,11 @@ app = Flask('codecool_series')
 app.secret_key = b'\x12\x06\x97O\x8aaw\xadW\x18\xa7\x08%n\x7f\x1a_\xb6\xe03\xf3\xe4\x9f'
 
 
+def make_embedded(youtube_link):
+    youtube_link = youtube_link.replace('watch?v=', 'embed/')
+    return youtube_link.replace('http', 'https')  # seems to work only for https
+
+
 @app.route('/')
 @app.route('/page/<int:page>')
 def index(page=1):
