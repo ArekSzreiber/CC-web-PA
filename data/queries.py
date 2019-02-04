@@ -63,6 +63,7 @@ def get_columns_names():
 	        AND table_schema = 'public';
     """)
 
+
 def get_sorted_shows(page=1, column="rating", reverse=False):
     page -= 1  # n-th page has index (n-1)
     number_at_page = 15
@@ -102,3 +103,53 @@ def get_sorted_shows(page=1, column="rating", reverse=False):
     variables = {'ignored': page*number_at_page,
                  'amount': number_at_page}
     return data.execute_select(statement, variables)
+
+
+def get_show_by_id(id):
+    show_list = data.execute_select("""
+        SELECT
+            title,
+            year,
+            overview,
+            runtime,
+            homepage,
+            rating,
+            STRING_AGG(DISTINCT genres.name, ', ') AS genres,
+            STRING_AGG(DISTINCT actors.name, ', ') AS actors,
+            trailer
+        FROM shows
+        JOIN show_genres
+            ON show_genres.show_id = shows.id
+        JOIN genres
+            ON genres.id = show_genres.genre_id
+        JOIN show_characters
+            ON show_genres.show_id = shows.id
+        JOIN actors
+            ON actors.id = show_characters.actor_id
+        WHERE
+            shows.id = %(id)s
+        GROUP BY
+            title,
+            year,
+            overview,
+            runtime,
+            homepage,
+            rating,
+            show_characters.show_id,
+            show_genres.show_id,
+            trailer;
+    """, {'id': id})
+    return show_list[0]
+
+
+def get_seasons_by_show_id(show_id):
+    seasons = data.execute_select("""
+        SELECT
+            title
+        FROM
+            seasons
+        WHERE
+            show_id = %(id)s
+        ORDER BY seasons ASC;
+    """, {'id': show_id})
+    return seasons

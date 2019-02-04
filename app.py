@@ -6,6 +6,11 @@ app = Flask('codecool_series')
 app.secret_key = b'\x12\x06\x97O\x8aaw\xadW\x18\xa7\x08%n\x7f\x1a_\xb6\xe03\xf3\xe4\x9f'
 
 
+def make_embedded(youtube_link):
+    youtube_link = youtube_link.replace('watch?v=', 'embed/')
+    return youtube_link.replace('http', 'https')  # seems to work only for https
+
+
 @app.route('/')
 @app.route('/page/<int:page>')
 def index(page=1):
@@ -28,6 +33,19 @@ def index(page=1):
 @app.route('/design')
 def design():
     return render_template('design.html')
+
+
+@app.route('/shows/<int:show_id>/')
+def route_details(show_id):
+    try:
+        show = queries.get_show_by_id(show_id)
+        show['trailer'] = make_embedded(show.get('trailer'))
+        seasons = queries.get_seasons_by_show_id(show_id)
+        return render_template('index.html',
+                               show=show,
+                               seasons=seasons)
+    except Exception as e:
+        return "Error 500"
 
 
 def main():

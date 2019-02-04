@@ -54,6 +54,7 @@
                         navigation.
                     </p>
                 </div>
+                {% if shows is defined %}
                 <div class="card">
                     <table>
                         <thead>
@@ -83,15 +84,51 @@
                         </tbody>
                     </table>
                 </div>
+                {% endif %}
+
                 <div class="card">
                     <ul>
                         {% for show in shows %}
                         <li>
-                            <a href="{{ '/tv-show/' + (show['id'] | string) }}">{{ show['title'] }}</a>
+                            <a href="{{ '/tv-show/' + (show['id'] | string) }}">
+                                {{ show['title'] }}
+                            </a>
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
+                {% if show is defined %}
+                <div class="card detailed-view">
+                    <div class="row">
+                        <div class="col col-twothird">
+                            <h2>{{ show['title'] }}</h2>
+                            <p class="small grayed">
+                                {{ show['runtime'] }}
+                                <span class="separator">|</span>
+                                {{ show['genres'] }}
+                                <span class="separator">|</span>
+                                {{ show['year'] }}
+                            </p>
+                            <p>{{ show['overview'] }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p><b>Stars:</b>{{ show['actors'] }}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <iframe width="420" height="345" src="{{ show['trailer'] }}"></iframe>
+                </div>
+                {% endif %}
+                {% if seasons is defined %}
+                <div class="card">
+                    <ul>
+                        {% for season in seasons %}
+                        <li>{{ season['title'] }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </section>
             <footer>
                 Copyright, bla-bla
