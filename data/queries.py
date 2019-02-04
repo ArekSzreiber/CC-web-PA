@@ -63,6 +63,7 @@ def get_columns_names():
 	        AND table_schema = 'public';
     """)
 
+
 def get_sorted_shows(page=1, column="rating", reverse=False):
     page -= 1  # n-th page has index (n-1)
     number_at_page = 15
@@ -102,3 +103,12 @@ def get_sorted_shows(page=1, column="rating", reverse=False):
     variables = {'ignored': page*number_at_page,
                  'amount': number_at_page}
     return data.execute_select(statement, variables)
+
+
+def get_show_by_id(id):
+    return data.execute_select("""
+        SELECT *
+        FROM shows
+        WHERE
+            id = %(id)s;
+    """, {'id': id})
