@@ -136,6 +136,7 @@ def get_show_by_id(id):
             homepage,
             rating,
             show_characters.show_id,
-            show_genres.show_id;
+            show_genres.show_id,
+            trailer;
     """, {'id': id})
     return show_list[0]
