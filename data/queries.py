@@ -114,12 +114,17 @@ def get_show_by_id(id):
             runtime,
             homepage,
             rating,
-            STRING_AGG(genres.name, ', ') AS genres
+            STRING_AGG(DISTINCT genres.name, ', ') AS genres,
+            STRING_AGG(DISTINCT actors.name, ', ') AS actors
         FROM shows
         JOIN show_genres
-        ON show_genres.show_id = shows.id
+            ON show_genres.show_id = shows.id
         JOIN genres
-        ON genres.id = show_genres.genre_id
+            ON genres.id = show_genres.genre_id
+        JOIN show_characters
+            ON show_genres.show_id = shows.id
+        JOIN actors
+            ON actors.id = show_characters.actor_id
         WHERE
             shows.id = %(id)s
         GROUP BY
@@ -128,6 +133,8 @@ def get_show_by_id(id):
             overview,
             runtime,
             homepage,
-            rating;
+            rating,
+            show_characters.show_id,
+            show_genres.show_id;
     """, {'id': id})
     return show_list[0]
