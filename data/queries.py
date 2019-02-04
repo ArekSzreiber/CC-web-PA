@@ -140,3 +140,15 @@ def get_show_by_id(id):
             trailer;
     """, {'id': id})
     return show_list[0]
+
+
+def get_seasons_by_show_id(show_id):
+    seasons = data.execute_select("""
+        SELECT
+        *
+        FROM
+        seasons
+        WHERE
+        show_id = %(id)s;
+    """, {'id': show_id})
+    return seasons
