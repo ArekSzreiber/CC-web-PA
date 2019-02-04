@@ -106,9 +106,28 @@ def get_sorted_shows(page=1, column="rating", reverse=False):
 
 
 def get_show_by_id(id):
-    return data.execute_select("""
-        SELECT *
+    show_list = data.execute_select("""
+        SELECT
+            title,
+            year,
+            overview,
+            runtime,
+            homepage,
+            rating,
+            STRING_AGG(genres.name, ', ') AS genres
         FROM shows
+        JOIN show_genres
+        ON show_genres.show_id = shows.id
+        JOIN genres
+        ON genres.id = show_genres.genre_id
         WHERE
-            id = %(id)s;
+            shows.id = %(id)s
+        GROUP BY
+            title,
+            year,
+            overview,
+            runtime,
+            homepage,
+            rating;
     """, {'id': id})
+    return show_list[0]
