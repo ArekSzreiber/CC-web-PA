@@ -40,7 +40,10 @@ def route_details(show_id):
     try:
         show = queries.get_show_by_id(show_id)
         show['trailer'] = make_embedded(show.get('trailer'))
-        return render_template('index.html', show=show)
+        seasons = queries.get_seasons_by_show_id(show_id)
+        return render_template('index.html',
+                               show=show,
+                               seasons=seasons)
     except Exception as e:
         return "Error 500"
 
