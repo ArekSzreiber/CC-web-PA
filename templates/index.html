@@ -95,6 +95,20 @@
                         {% endfor %}
                     </ul>
                 </div>
+                {% if show is defined %}
+                <div class="card detailed-view">
+                    <div class="row">
+                        <div class="col col-twothird">
+                            <h2>{{ show['title'] }}</h2>
+                            <p class="small grayed">{{ show['runtime'] }}<span class="separator">|</span> {{ show['genres'] }} <span class="separator">|</span>                            12 February 2016 (USA)</p>
+                            <p>{{ show['overview'] }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p><b>Stars:</b>{{ show['actors'] }}</p>
+                    </div>
+                </div>
+                {% endif %}
             </section>
             <footer>
                 Copyright, bla-bla
