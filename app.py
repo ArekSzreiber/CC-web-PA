@@ -39,6 +39,7 @@ def design():
 def route_details(show_id):
 #try:
     show = queries.get_show_by_id(show_id)
+    show['trailer'] = make_embedded(show.get('trailer'))
     return render_template('index.html', show=show)
 #except Exception as e:
 #    return "Error 500"
