@@ -90,7 +90,9 @@
                     <ul>
                         {% for show in shows %}
                         <li>
-                            <a href="{{ '/tv-show/' + (show['id'] | string) }}">{{ show['title'] }}</a>
+                            <a href="{{ '/tv-show/' + (show['id'] | string) }}">
+                                {{ show['title'] }}
+                            </a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -100,7 +102,13 @@
                     <div class="row">
                         <div class="col col-twothird">
                             <h2>{{ show['title'] }}</h2>
-                            <p class="small grayed">{{ show['runtime'] }}<span class="separator">|</span> {{ show['genres'] }} <span class="separator">|</span>                            12 February 2016 (USA)</p>
+                            <p class="small grayed">
+                                {{ show['runtime'] }}
+                                <span class="separator">|</span>
+                                {{ show['genres'] }}
+                                <span class="separator">|</span>
+                                {{ show['year'] }}
+                            </p>
                             <p>{{ show['overview'] }}</p>
                         </div>
                     </div>
