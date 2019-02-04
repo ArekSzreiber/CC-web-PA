@@ -32,11 +32,12 @@ def design():
 
 @app.route('/shows/<int:show_id>/')
 def route_details(show_id):
-    try:
-        show = queries.get_show_by_id(show_id)
-        return render_template('index.html', show=show)
-    except Exception as e:
-        return "Error 500"
+#try:
+    show = queries.get_show_by_id(show_id)
+    return render_template('index.html', show=show)
+#except Exception as e:
+#    return "Error 500"
+
 
 def main():
     app.run(debug=True)
