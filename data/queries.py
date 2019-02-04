@@ -115,7 +115,8 @@ def get_show_by_id(id):
             homepage,
             rating,
             STRING_AGG(DISTINCT genres.name, ', ') AS genres,
-            STRING_AGG(DISTINCT actors.name, ', ') AS actors
+            STRING_AGG(DISTINCT actors.name, ', ') AS actors,
+            trailer
         FROM shows
         JOIN show_genres
             ON show_genres.show_id = shows.id
