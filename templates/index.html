@@ -54,6 +54,7 @@
                         navigation.
                     </p>
                 </div>
+                {% if shows is defined %}
                 <div class="card">
                     <table>
                         <thead>
@@ -83,6 +84,8 @@
                         </tbody>
                     </table>
                 </div>
+                {% endif %}
+
                 <div class="card">
                     <ul>
                         {% for show in shows %}
