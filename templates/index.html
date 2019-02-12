@@ -161,6 +161,29 @@
                 </div>
                 {% endif %}
                 {% endif %}
+                {% if shows_by_genre is defined %}
+                <div class="card">
+                    <h1>{{ genre }} shows:</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Year</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for show in shows_by_genre %}
+                            <tr>
+                                <td>{{ show.title }}</td>
+                                <td>{{ show.year }}</td>
+                                <td>{{ show.rating }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
             </section>
             <footer>
                 Copyright, bla-bla
