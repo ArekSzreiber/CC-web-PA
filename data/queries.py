@@ -168,3 +168,19 @@ def get_season_by_id(season_id):
         return seasons[0]
     except IndexError:
         return {}
+
+
+def get_episodes_by_season_id(season_id):
+    episodes = data.execute_select("""
+        SELECT
+            id,
+            title,
+            episode_number,
+            overview
+        FROM episodes
+        WHERE season_id = %(season_id)s;
+    """, {'season_id': season_id})
+    try:
+        return episodes
+    except IndexError:
+        return {}
