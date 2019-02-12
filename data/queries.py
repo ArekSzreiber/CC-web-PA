@@ -153,3 +153,18 @@ def get_seasons_by_show_id(show_id):
         ORDER BY seasons ASC;
     """, {'id': show_id})
     return seasons
+
+def get_season_by_id(season_id):
+    seasons = data.execute_select("""
+        SELECT
+            id,
+            season_number,
+            title,
+            overview
+        FROM seasons
+        WHERE id = %(id)s;
+    """, {'id': season_id})
+    try:
+        return seasons[0]
+    except IndexError:
+        return {}
