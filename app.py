@@ -57,7 +57,7 @@ def show_season(season_id):
                                season=season,
                                episodes=episodes)
     except Exception as e:
-    return "Error 500"
+        return "Error 500"
 
 
 
@@ -75,7 +75,7 @@ def show_shows_with_genre(genre_id=1):
                                shows_by_genre=shows,
                                genre=genre_name)
     except Exception as e:
-    return "Error 500"
+        return "Error 500"
 
 def main():
     app.run(debug=True)
