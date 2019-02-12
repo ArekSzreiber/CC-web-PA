@@ -183,3 +183,20 @@ def get_episodes_by_season_id(season_id):
         return episodes
     except IndexError:
         return {}
+
+
+def get_shows_by_genre_id(genre_id):
+    shows = data.execute_select("""
+        SELECT
+            shows.title,
+            shows.year,
+            shows.rating
+        FROM shows
+        JOIN show_genres ON shows.id = show_genres.show_id
+        JOIN genres ON show_genres.genre_id = genres.id
+        WHERE genres.id = %(genre_id)s;
+    """, {'genre_id': genre_id})
+    try:
+        return shows
+    except IndexError:
+        return {}
