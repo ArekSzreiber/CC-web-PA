@@ -50,14 +50,15 @@ def route_details(show_id):
 
 @app.route('/seasons/<int:season_id>/')
 def show_season(season_id):
-#try:
-    season = queries.get_season_by_id(season_id)
-    episodes = queries.get_episodes_by_season_id(season_id)
-    return render_template('index.html',
-                           season=season,
-                           episodes=episodes)
-#except Exception as e:
-#return "Error 500"
+    try:
+        season = queries.get_season_by_id(season_id)
+        episodes = queries.get_episodes_by_season_id(season_id)
+        return render_template('index.html',
+                               season=season,
+                               episodes=episodes)
+    except Exception as e:
+    return "Error 500"
+
 
 
 @app.route('/episodes/<int:episode_id>')
