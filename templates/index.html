@@ -136,6 +136,28 @@
                     <h4>Season number: {{ season.season_number }}</h4>
                     <p>{{ season.overview }}</p>
                 </div>
+                {% if episodes is defined %}
+                <div class="card">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Title</th>
+                                <th>Ovewview</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for episode in episodes %}
+                            <tr>
+                                <td>{{ episode.title }}</td>
+                                <td>{{ episode.episode_number }}</td>
+                                <td>{{ episode.overview }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
                 {% endif %}
             </section>
             <footer>
