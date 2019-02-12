@@ -129,6 +129,14 @@
                     </ul>
                 </div>
                 {% endif %}
+                {% if season is defined %}
+
+                <div class="card">
+                    <h3>{{ season.title }}</h3>
+                    <h4>Season number: {{ season.season_number }}</h4>
+                    <p>{{ season.overview }}</p>
+                </div>
+                {% endif %}
             </section>
             <footer>
                 Copyright, bla-bla
