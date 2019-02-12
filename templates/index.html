@@ -143,15 +143,17 @@
                             <tr>
                                 <th>Number</th>
                                 <th>Title</th>
-                                <th>Ovewview</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for episode in episodes %}
                             <tr>
-                                <td>{{ episode.title }}</td>
                                 <td>{{ episode.episode_number }}</td>
-                                <td>{{ episode.overview }}</td>
+                                <td>
+                                    <a href="{{ url_for('show_episode', episode_id=episode['id']) }}">
+                                    {{ episode.title }}
+                                    </a>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
