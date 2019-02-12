@@ -175,8 +175,7 @@ def get_episodes_by_season_id(season_id):
         SELECT
             id,
             title,
-            episode_number,
-            overview
+            episode_number
         FROM episodes
         WHERE season_id = %(season_id)s;
     """, {'season_id': season_id})
