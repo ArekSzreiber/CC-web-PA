@@ -65,6 +65,17 @@ def show_episode(episode_id=1):
     return "blank page"
 
 
+@app.route('/genres/<int:genre_id>')
+def show_shows_with_genre(genre_id=1):
+    try:
+        shows = queries.get_shows_by_genre_id(genre_id)
+        genre_name = queries.get_genre_name(genre_id)
+        return render_template('index.html',
+                               shows_by_genre=shows,
+                               genre=genre_name)
+    except Exception as e:
+    return "Error 500"
+
 def main():
     app.run(debug=True)
 
