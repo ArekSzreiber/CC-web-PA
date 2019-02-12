@@ -60,7 +60,7 @@ def show_season(season_id):
 #return "Error 500"
 
 
-@app.route('episodes/<int:episode_id>')
+@app.route('/episodes/<int:episode_id>')
 def show_episode(episode_id=1):
     return "blank page"
 
