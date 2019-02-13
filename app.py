@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, url_for, session
+from flask import Flask, render_template, request, url_for, session, make_response
 from data import queries
+from logic import validations as v
 
 app = Flask('codecool_series')
 
@@ -28,6 +29,33 @@ def index(page=1):
         return render_template('index.html', shows=shows, page=page)
     except Exception as e:
         return "Error 500"
+
+@app.route('/actor', methods=["POST", "GET"])
+def add_actor():
+    if method = "GET":
+        return render_template("add_actor_form.html")
+    elif method = "POST":
+        name = request.form.get('name')
+        birthday = request.form.get('birthday')
+        death = request.form.get('death')
+        biography = request.form.get('biography')
+        actor = {
+            "name" : name,
+            "birthday" : birthday,
+            "death" : death,
+            "biography" : biography
+        }
+        if v.validate_actor_data(actor):
+            result = queries.save_actor(actor)
+            if result:
+                message = "actor saved"
+                return redirect(url_for("index"))
+            else:
+                return render_template("add_actor_form.html")
+        else:
+            return render_template("add_actor_form.html")        
+    else:
+        return make_response("method not allowed", 405)
 
 
 @app.route('/design')
