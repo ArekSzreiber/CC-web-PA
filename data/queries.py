@@ -214,3 +214,5 @@ def get_genre_name(genre_id):
     except IndexError:
         return 'Genre not found'
 
+def save_actor(actor):
+    pass
