@@ -214,14 +214,3 @@ def get_genre_name(genre_id):
     except IndexError:
         return 'Genre not found'
 
-
-def get_episodes_by_season_id(season_id):
-    episodes = data.execute_select("""
-        SELECT
-            title,
-            episode_number,
-            overview
-        FROM episodes
-        WHERE season_id = %(season_id)s;
-    """, {'season_id': season_id})
-    return episodes
