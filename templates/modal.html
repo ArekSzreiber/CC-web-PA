@@ -1,0 +1,17 @@
+
+{% block head %}
+    <script type="text/javascript"
+            src="{{ url_for('static', filename='js/modal.js') }}"
+            defer>
+    </script>
+{% endblock %}
+
+<div id="episodesModalWrapper">
+    <div id="episodesModalBody">
+        <ul>
+            {% for episode in episodes %}
+            <li>{{ episode }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
