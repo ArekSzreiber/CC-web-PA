@@ -213,3 +213,4 @@ def get_genre_name(genre_id):
         return genre_name[0]['name']
     except IndexError:
         return 'Genre not found'
+
